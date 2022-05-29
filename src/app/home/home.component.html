@@ -1,0 +1,36 @@
+<mat-card class="card-section" *ngIf="!loginDisplay">
+  <mat-card-title>Angular single-page application built with MSAL Angular</mat-card-title>
+  <mat-card-subtitle>Sign-in with Azure AD B2C and call a protected web API</mat-card-subtitle>
+  <mat-card-content>This sample demonstrates how to configure MSAL Angular Library.</mat-card-content>
+  <mat-card-content>This SPA connects to Azure B2C to authenticate the user and get an access token, the SPA will also consume a WebAPI Controller based API that is protected by Azure B2C.</mat-card-content>
+  <mat-card-content>Below I leave the links to the "Angular SPA" and "API" repositories.</mat-card-content>
+  <mat-card-title>Show me the Code!</mat-card-title>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <a mat-raised-button color="primary" href="https://github.com/eduardoalbarado/Angular-AzureB2C" target="_blank">Repo Angular-AzureB2C</a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a mat-raised-button color="primary" href="https://github.com/eduardoalbarado/WebApi-AzureB2C" target="_blank">Repo WebApi-AzureB2C</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="loginDisplay">
+
+  <!-- Claim Column -->
+  <ng-container matColumnDef="claim">
+    <th mat-header-cell *matHeaderCellDef> Claim </th>
+    <td mat-cell *matCellDef="let element"> {{element.claim}} </td>
+  </ng-container>
+
+  <!-- Value Column -->
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef> Value </th>
+    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
