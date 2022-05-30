@@ -60,6 +60,14 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           }
         },
@@ -71,6 +79,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular11-sample-app:build:production"
+            },
+            "dev": {
+              "browserTarget": "angular11-sample-app:build:dev"
             }
           }
         },

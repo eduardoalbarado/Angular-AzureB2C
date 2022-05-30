@@ -7,6 +7,7 @@
 
 
  import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
+import { environment } from 'src/environments/environment';
 
  const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
@@ -17,18 +18,18 @@
   */
  export const b2cPolicies = {
      names: {
-         signUpSignIn: "PolicyNameSignUpSignIn",
-         editProfile: "PolicyNameEditProfile",
+         signUpSignIn: "B2C_1_sign-up",
+         editProfile: "B2C_1_edit_profile"
      },
      authorities: {
          signUpSignIn: {
-             authority: "https://MyDomain.b2clogin.com/MyDomain.onmicrosoft.com/PolicyNameSignUpSignIn-up",
+             authority: environment.B2C_signUpSignIn,
          },
          editProfile: {
-             authority: "https://MyDomain.b2clogin.com/MyDomain.onmicrosoft.com/PolicyNameEditProfile"
+             authority: environment.B2C_editProfile
          }
      },
-     authorityDomain: "MyDomain.b2clogin.com"
+     authorityDomain: environment.B2C_authorityDomain
  };
 
  /**
@@ -38,7 +39,7 @@
   */
   export const msalConfig: Configuration = {
      auth: {
-         clientId: 'b5000000-1000-1000-1000-0000000000', // This is the ONLY mandatory field that you need to supply.
+         clientId: environment.B2C_clientId, // This is the ONLY mandatory field that you need to supply.
          authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
          knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
          redirectUri: '/', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
@@ -64,8 +65,8 @@
  */
 export const protectedResources = {
   todoListApi: {
-    endpoint: "https://localhost:44351/api/todolist",
-    scopes: ["https://MyDomain.onmicrosoft.com/MyAppB2C/ReadScope"],
+    endpoint: environment.API_url,
+    scopes: [environment.API_scopes],
   },
 }
 
