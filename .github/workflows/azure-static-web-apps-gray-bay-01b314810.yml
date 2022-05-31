@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: microsoft/variable-substitution@v1 
         with:
-            files: 'scr/environments/environment.prod.json'
+            files: '/scr/environments/environment.prod.json'
         env:
           B2C_clientId: ${{ secrets.B2C_CLIENTID }}
           B2C_signUpSignIn: ${{ secrets.B2C_SIGNUPSIGNIN }}
