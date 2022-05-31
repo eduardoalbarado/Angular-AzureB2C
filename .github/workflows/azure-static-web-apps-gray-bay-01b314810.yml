@@ -19,7 +19,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Find and Replace
       - uses: vafinvr/template-env-action@master
         env:
           B2C_clientId: ${{ secrets.B2C_CLIENTID }}
