@@ -15,6 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - uses: microsoft/variable-substitution@v1 
+        with:
+            files: 'scr/environments/environment.prod.json'
+        env:
+          B2C_clientId: ${{ secrets.B2C_CLIENTID }}
+          B2C_signUpSignIn: ${{ secrets.B2C_SIGNUPSIGNIN }}
+          B2C_editProfile: ${{ secrets.B2C_EDITPROFILE }}
+          B2C_authorityDomain: ${{ secrets.B2C_AUTHORITYDOMAIN }}
+          API_url: ${{ secrets.API_URL }}
+          API_scopes: ${{ secrets.API_SCOPES }}
+          
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -32,16 +43,7 @@ jobs:
           output_location: "dist/angular11-sample-app" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
           
-      - uses: microsoft/variable-substitution@v1 
-        with:
-            files: 'dist/angular11-sample-app/environments/environment.prod.json'
-        env:
-          B2C_clientId: ${{ secrets.B2C_CLIENTID }}
-          B2C_signUpSignIn: ${{ secrets.B2C_SIGNUPSIGNIN }}
-          B2C_editProfile: ${{ secrets.B2C_EDITPROFILE }}
-          B2C_authorityDomain: ${{ secrets.B2C_AUTHORITYDOMAIN }}
-          API_url: ${{ secrets.API_URL }}
-          API_scopes: ${{ secrets.API_SCOPES }}
+
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
