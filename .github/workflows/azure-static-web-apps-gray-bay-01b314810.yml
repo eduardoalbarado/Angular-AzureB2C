@@ -30,6 +30,17 @@ jobs:
         with:
           filename: ./src/environments/environment.prod.ts
           
+      - uses: vafinvr/template-env-action@master
+        env:
+          B2C_clientId: ${{ secrets.B2C_CLIENTID }}
+          B2C_signUpSignIn: ${{ secrets.B2C_SIGNUPSIGNIN }}
+          B2C_editProfile: ${{ secrets.B2C_EDITPROFILE }}
+          B2C_authorityDomain: ${{ secrets.B2C_AUTHORITYDOMAIN }}
+          API_url: ${{ secrets.API_URL }}
+          API_scopes: ${{ secrets.API_SCOPES }}
+        with:
+          filename: ./src/environments/environment.prod.ts
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
